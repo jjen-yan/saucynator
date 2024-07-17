@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Interface</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          const chatMessages = document.getElementById("chat-messages");
+          
+          // Scroll to the bottom of the chat messages
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        });
+      </script>
+      
+    <div class="column">
+      <div class="starrow">
+        <img src='./static/star1.png' class="rotate star" id="star1">
+        <img src='./static/star2.png' class="rotate star">
+      </div>
+      <div class="starrow">
+        <img src='./static/star2.png' class="rotate star" id="star2">
+        <img src='./static/star4.png' class="rotate star">
+      </div>
+        <div class="row">
+          <!-- <img class='img-icon' src='./static/logo.png' alt='logo'> -->
+          <img class='img-icon' id='pizza-icon' src='./static/pizza-icon.png' alt='pizza icon'>
+          <h1> saucynator </h1>
+          <img class='img-icon' id='pizza-icon' src='./static/pizza-icon.png' alt='pizza icon'>
+        </div>
+        <div class="row">
+          <h3> become your star chef!!</h3>
+        </div>
+        <div class="starrow">
+          <img src='./static/star3.png' class="rotate star" id="star3">
+        <img src='./static/star4.png' class="rotate star">
+        </div>
+        <div class="starrow">
+          <img src='./static/star1.png' class="rotate star" id="star4">
+          <img src='./static/star4.png' class="rotate star">
+        </div>
+        
+        <div class="row">
+          <div class="pantry-container column">
+            <div class="row">
+              <i class="fa-solid fa-table-list custom-icon"></i>
+              <h2> pantry </h2>
+            </div>
+            {% if ing_dict %}
+            {% for key in ing_dict %}
+                <div class="ingredient-container column"> 
+                    <div class="ingredient-container row">
+                        <div class="ingredient-name"> {{ key }} </div>
+                        <div class="ingredient-quantity"> {{ ing_dict[key] }} </div>
+                      </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+          </div>
+          <div class="chat-container column">
+            <div class="row">
+              <i class="fa-regular fa-message custom-icon"></i>
+              <h2> chatbot </h2>
+            </div>
+            <div class="chat-messages column" id="chat-messages">
+              {% if messages %}
+                {% for message in messages %}
+                    <div class="{{ message['role'] }}-message">{{ message['content'] }}</div>
+                {% endfor %}
+            {% endif %}
+            </div>
+            <div class="input-container row">
+              <form method="POST">
+                <div class="row">
+                <input type="text" id="human_input" name="human_input" placeholder="enter message" required />
+                <!-- <button type="submit"><img id="human_submit" src='./static/submitbutton.png'></button> -->
+                <button type="submit">submit</button>
+                </div>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+    
+
+</body>
+</html>
